@@ -1,18 +1,48 @@
-﻿// CMS Sports Theme - Main JS
+// CMS Theme - Main JavaScript
 document.addEventListener('DOMContentLoaded', function() {
-    // Smooth hover effect on post cards
-    document.querySelectorAll('.post-card').forEach(function(card) {
-        card.addEventListener('mouseenter', function() {
-            this.style.transition = 'transform .2s ease, box-shadow .2s ease';
-        });
-    });
+    // 1. Account Dropdown toggle (Module 1 Header)
+    var accountDropdownBtn = document.getElementById('accountDropdownBtn');
+    var accountDropdownWrapper = document.querySelector('.nav-dropdown-wrapper');
 
-    // Active nav link highlight
-    var currentPath = window.location.pathname;
-    document.querySelectorAll('#primary-nav a').forEach(function(link) {
-        if (link.getAttribute('href') && link.getAttribute('href').includes(currentPath.split('/').pop())) {
-            link.style.background = 'rgba(255,255,255,.18)';
-            link.style.color = '#fff';
-        }
-    });
+    if (accountDropdownBtn && accountDropdownWrapper) {
+        accountDropdownBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            accountDropdownWrapper.classList.toggle('open');
+            var isExpanded = accountDropdownWrapper.classList.contains('open');
+            accountDropdownBtn.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!accountDropdownWrapper.contains(e.target)) {
+                accountDropdownWrapper.classList.remove('open');
+                accountDropdownBtn.setAttribute('aria-expanded', 'false');
+            }
+        });
+    }
+
+    // 2. Search Icon in Nav (focus search bar or navigate)
+    var navSearchTrigger = document.getElementById('navSearchTrigger');
+    var headerSearchInput = document.querySelector('.navbar-search-input');
+    if (navSearchTrigger && headerSearchInput) {
+        navSearchTrigger.addEventListener('click', function(e) {
+            if (headerSearchInput.offsetParent !== null) {
+                // If header search input is visible, focus it
+                e.preventDefault();
+                headerSearchInput.focus();
+                headerSearchInput.select();
+            }
+        });
+    }
+
+    // 3. Mobile Hamburger toggle
+    var hamburgerBtn = document.querySelector('.nav-hamburger');
+    var navLinks = document.querySelector('.navbar-links');
+    if (hamburgerBtn && navLinks) {
+        hamburgerBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            navLinks.classList.toggle('open');
+        });
+    }
 });

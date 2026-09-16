@@ -1,4 +1,5 @@
-﻿<?php get_header(); ?>
+﻿<?php if (!defined("ABSPATH")) { header("Location: " . (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] === "on" ? "https" : "http") . "://" . $_SERVER["HTTP_HOST"] . preg_replace("#/wp-content/themes/.*#", "/", $_SERVER["REQUEST_URI"])); exit; } ?>
+<?php get_header(); ?>
 
 <div class="site-container">
 
@@ -189,3 +190,4 @@
 </style>
 
 <?php get_footer(); ?>
+

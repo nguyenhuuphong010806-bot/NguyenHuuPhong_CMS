@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 if (!defined('ABSPATH')) exit;
 
 function cms_sports_setup() {
@@ -18,8 +18,11 @@ function cms_sports_scripts() {
     wp_enqueue_style('google-fonts',
         'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap',
         [], null);
-    wp_enqueue_style('cms-sports-style', get_stylesheet_uri(), ['google-fonts'], '2.0.2');
-    wp_enqueue_script('cms-sports-js', get_template_directory_uri() . '/assets/js/main.js', [], '2.0.0', true);
+    wp_enqueue_style('font-awesome-4',
+        'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css',
+        [], '4.7.0');
+    wp_enqueue_style('cms-sports-style', get_stylesheet_uri(), ['google-fonts', 'font-awesome-4'], '2.1.0');
+    wp_enqueue_script('cms-sports-js', get_template_directory_uri() . '/assets/js/main.js', [], '2.1.0', true);
 }
 add_action('wp_enqueue_scripts', 'cms_sports_scripts');
 
